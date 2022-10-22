@@ -8,8 +8,10 @@ export default new Vuex.Store({
     userData: {
       streetAddress: '',
       zipCode: '',
-      city: '',
-      country: ''
+      currentCity: '',
+      currentCountry: '',
+      cityTo: '',
+      countryTo: ''
     }
   },
   getters: {
@@ -18,13 +20,20 @@ export default new Vuex.Store({
     setData1(state, payload) {
       state.userData.streetAddress = payload.streetAddress
       state.userData.zipCode = payload.zipCode
-      state.userData.city = payload.city
-      state.userData.country = payload.country
+      state.userData.currentCity = payload.currentCity
+      state.userData.currentCountry = payload.currentCountry
+    },
+    setData2(state, payload) {
+      state.userData.cityTo = payload.city
+      state.userData.countryTo = payload.country
     }
   },
   actions: {
     addData1(context, payload) {
       context.commit('setData1', payload);
+    },
+    addData2(context, payload) {
+      context.commit('setData2', payload);
     }
   },
 });

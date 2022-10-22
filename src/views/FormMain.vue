@@ -19,13 +19,16 @@
     </div>
 
     <div class="container_sub">
+      <keep-alive>
         <first-form v-if="componentNum === 1" :num="componentNum" @nextForm="nextForm"></first-form>
-        <second-form v-if="componentNum === 2"></second-form>
+        <second-form v-if="componentNum === 2" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></second-form>
+        <third-form v-if="componentNum === 3" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></third-form>
 
       <!-- <div class="sub_btn d-flex justify-space-between">
         <v-btn color="primary" large @click="backForm" :disabled="componentNum == 1"><v-icon>mdi-arrow-left</v-icon> Back</v-btn>
         <v-btn color="primary" large @click="nextForm" :disabled="componentNum == 7">Continue <v-icon>mdi-arrow-right</v-icon></v-btn>
       </div> -->
+      </keep-alive>
     </div>
 
   </div>
@@ -34,19 +37,22 @@
 <script>
 import FirstForm from '../components/BaseForm/FirstForm.vue';
 import SecondForm from '../components/BaseForm/SecondForm.vue';
+import ThirdForm from '../components/BaseForm/ThirdForm.vue';
 
 export default {
   name: "Form",
   components: {
     FirstForm,
-    SecondForm
-  },
+    SecondForm,
+    ThirdForm
+},
   data() {
     return {
       componentNum: 1,
       value: 0,
       query: false,
       show: true,
+      counterback: 0
     };
   },
   mounted() {
@@ -60,10 +66,15 @@ export default {
     },
     nextForm() {
         this.componentNum++;
-        this.value = this.value + 15;
+        if (this.counterback === 0) {
+          this.value = this.value + 15;
+        } else {
+          this.counterback--;
+        }
     },
     backForm() {
         this.componentNum--;
+        this.counterback++;
     }
   },
 };
@@ -71,12 +82,13 @@ export default {
 
 <style>
 #main {
-  margin: 3rem 10%;
+  margin: 2rem 10%;
   max-width: 90%;
   padding: 10px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 15px;
   font-family: sans-serif;
+  background: #fafafa;
 }
 
 .main_header {

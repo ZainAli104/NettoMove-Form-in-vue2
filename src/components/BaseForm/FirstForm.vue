@@ -35,7 +35,7 @@
             color="primary"
             outlined
             label="City"
-            v-model.trim="city"
+            v-model.trim="currentCity"
             required
           ></v-text-field>
         </v-col>
@@ -45,7 +45,7 @@
             color="primary"
             outlined
             label="Country"
-            v-model.trim="country"
+            v-model.trim="currentCountry"
             required
           ></v-text-field>
         </v-col>
@@ -72,8 +72,8 @@ export default {
     return {
       streetAddress: "",
       zipCode: "",
-      city: "",
-      country: "",
+      currentCity: "",
+      currentCountry: "",
     };
   },
   methods: {
@@ -83,8 +83,8 @@ export default {
         const data = {
           streetAddress: this.streetAddress,
           zipCode: this.zipCode,
-          city: this.city,
-          country: this.country
+          currentCity: this.currentCity,
+          currentCountry: this.currentCountry
         }
         this.$store.dispatch('addData1', data);
 
