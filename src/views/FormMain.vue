@@ -1,13 +1,13 @@
 <template>
   <div id="main">
     <div>
-      <h1 class="main_header">Netto<span>Move</span></h1>
+      <h1 class="main_header" @click="mainPage">Netto<span>Move</span></h1>
       <div class="d-flex justify-space-between">
         <p class="header_p">Your Quote Request</p>
-        <p class="header_p progress_title">{{ value }}% progress</p>
+        <p class="header_p progress_title" v-if="componentNum !== 9">{{ value }}% progress</p>
       </div>
 
-      <div style="min-height: 40px; margin: 10px 30px">
+      <div style="min-height: 40px; margin: 10px 30px" v-if="componentNum !== 9">
         <v-progress-linear
           v-model="value"
           :active="show"
@@ -26,6 +26,9 @@
         <fourth-form v-if="componentNum === 4" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></fourth-form>
         <fifth-form v-if="componentNum === 5" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></fifth-form>
         <sixth-form v-if="componentNum === 6" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></sixth-form>
+        <seventh-form v-if="componentNum === 7" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></seventh-form>
+        <eighth-form v-if="componentNum === 8" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></eighth-form>
+        <last-form  v-if="componentNum === 9"></last-form>
 
       <!-- <div class="sub_btn d-flex justify-space-between">
         <v-btn color="primary" large @click="backForm" :disabled="componentNum == 1"><v-icon>mdi-arrow-left</v-icon> Back</v-btn>
@@ -44,6 +47,9 @@ import ThirdForm from '../components/BaseForm/ThirdForm.vue';
 import FourthForm from '../components/BaseForm/FourthForm.vue';
 import FifthForm from '../components/BaseForm/FifthForm.vue';
 import SixthForm from '../components/BaseForm/SixthForm.vue';
+import SeventhForm from '../components/BaseForm/SeventhForm.vue';
+import EighthForm from '../components/BaseForm/EighthForm.vue';
+import LastForm from '../components/BaseForm/LastForm.vue';
 
 export default {
   name: "Form",
@@ -53,11 +59,14 @@ export default {
     ThirdForm,
     FourthForm,
     FifthForm,
-    SixthForm
+    SixthForm,
+    SeventhForm,
+    EighthForm,
+    LastForm
 },
   data() {
     return {
-      componentNum: 6,
+      componentNum: 1,
       value: 0,
       query: false,
       show: true,
@@ -84,6 +93,9 @@ export default {
     backForm() {
         this.componentNum--;
         this.counterback++;
+    },
+    mainPage() {
+      this.$router.push('/');
     }
   },
 };
@@ -104,6 +116,7 @@ export default {
   margin: 0px 2rem;
   margin-top: 10px;
   color: #000083;
+  cursor: pointer;
 }
 
 .main_header span {

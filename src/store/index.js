@@ -15,7 +15,10 @@ export default new Vuex.Store({
       luggageType: "",
       description: '',
       movingForWork: '',
-      date: ''
+      date: '',
+      name: '',
+      email: '',
+      phoneNumber: ''
     },
   },
   getters: {},
@@ -42,6 +45,13 @@ export default new Vuex.Store({
     setData6(state, payload) {
       state.userData.date = payload;
     },
+    setData7(state, payload) {
+      state.userData.name = payload;
+    },
+    setData8(state, payload) {
+      state.userData.email = payload.email;
+      state.userData.phoneNumber = payload.phoneNumber;
+    },
   },
   actions: {
     addData1(context, payload) {
@@ -61,6 +71,12 @@ export default new Vuex.Store({
     },
     addData6(context, payload) {
       context.commit("setData6", payload);
+    },
+    addData7(context, payload) {
+      context.commit("setData7", payload);
+    },
+    addData8(context, payload) {
+      context.commit("setData8", payload);
     },
   },
 });
