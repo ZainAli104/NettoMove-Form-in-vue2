@@ -1,35 +1,78 @@
 <template>
-    <div>
-      <!-- <h2>
-          Start Date: {{ this.dates[0] || "null" }} --- End Date:{{
-            this.dates[1] || "null"
-          }}
-        </h2> -->
-      <v-date-picker @input="getDate" v-model="dates" range :min="this.nowDate" />
+  <div>
+    <div class="container_center">
+      <h1 class="title_header">
+        <span class="title_span">When</span> are you moving?
+      </h1>
+      <p>Don't have a date yet? Select the earliest date you can move.</p>
     </div>
-  </template>
+    <v-date-picker
+      class="calender"
+      @input="getDate"
+      v-model="date"
+      :min="this.nowDate"
+    />
+
+    <p class="p_red" v-if="isValid">Please select a date!</p>
+
+    <div class="sub_btn d-flex justify-space-between">
+      <v-btn color="primary" large @click="backOne"
+        ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
+      >
+      <v-btn color="primary" large @click="setData"
+        >Continue <v-icon>mdi-arrow-right</v-icon></v-btn
+      >
+    </div>
+  </div>
+</template>
     
     <script>
-  export default {
-    data() {
-      return {
-        dates: ["2022-10-22", "2022-10-22"],
-        nowDate: null,
-      };
+export default {
+  props: ["num"],
+  data() {
+    return {
+      date: "2022-10-22",
+      nowDate: null,
+      isValid: false
+    };
+  },
+  methods: {
+    getNowDate() {
+      this.nowDate = new Date().toISOString().split("T")[0];
     },
-  
-    methods: {
-      getNowDate() {
-        this.nowDate = new Date().toISOString().split("T")[0];
-      },
-  
-      getDate() {
-        console.log(this.dates[0], "Start Date");
-      //   console.log(this.dates[1], "End Date");
-      },
+    getDate() {
+    //   console.log(this.date, "Start Date");
     },
-    mounted() {
-      this.getNowDate();
+    setData() {
+      if (this.date !== '2022-10-22') {
+        this.$store.dispatch("addData6", this.date);
+        this.isValid = false;
+
+        this.$emit("nextForm");
+      } else {
+        this.isValid = true;
+      }
     },
-  };
-  </script>
+    backOne() {
+      this.$emit("backOne");
+    },
+  },
+  mounted() {
+    this.getNowDate();
+  },
+};
+</script>
+
+<style scoped>
+.container_center {
+  margin-top: -40px;
+  text-align: center;
+}
+.calender {
+  margin-bottom: 20px;
+}
+.p_red {
+    color: red;
+    text-align: center;
+}
+</style>

@@ -22,6 +22,7 @@
             <p>Some boxes or <br>luaggage</p>
         </div>
     </div>
+    <p class="p_text" v-if="showValidation">Please Select one catagory!</p>
 
     <div class="sub_btn d-flex justify-space-between">
       <v-btn color="primary" large @click="backOne"
@@ -41,16 +42,20 @@ export default {
   props: ["num"],
   data() {
     return {
-      activeBtn: ''
+      activeBtn: '',
+      showValidation: false
     };
   },
   methods: {
     required,
     submit() {
       if (this.activeBtn !== '') {
+          this.showValidation = false
         this.$store.dispatch("addData3", this.activeBtn);
 
         this.$emit("nextForm");
+      } else {
+        this.showValidation = true
       }
     },
     backOne() {
@@ -102,5 +107,9 @@ export default {
     color: white;
     transform: translateY(-12px);
     transition: .3s ease-out;
+}
+.p_text {
+    color: red;
+    margin-top: -15px;
 }
 </style>

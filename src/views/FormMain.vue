@@ -24,6 +24,8 @@
         <second-form v-if="componentNum === 2" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></second-form>
         <third-form v-if="componentNum === 3" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></third-form>
         <fourth-form v-if="componentNum === 4" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></fourth-form>
+        <fifth-form v-if="componentNum === 5" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></fifth-form>
+        <sixth-form v-if="componentNum === 6" :num="componentNum" @nextForm="nextForm" @backOne="backForm"></sixth-form>
 
       <!-- <div class="sub_btn d-flex justify-space-between">
         <v-btn color="primary" large @click="backForm" :disabled="componentNum == 1"><v-icon>mdi-arrow-left</v-icon> Back</v-btn>
@@ -40,6 +42,8 @@ import FirstForm from '../components/BaseForm/FirstForm.vue';
 import SecondForm from '../components/BaseForm/SecondForm.vue';
 import ThirdForm from '../components/BaseForm/ThirdForm.vue';
 import FourthForm from '../components/BaseForm/FourthForm.vue';
+import FifthForm from '../components/BaseForm/FifthForm.vue';
+import SixthForm from '../components/BaseForm/SixthForm.vue';
 
 export default {
   name: "Form",
@@ -47,11 +51,13 @@ export default {
     FirstForm,
     SecondForm,
     ThirdForm,
-    FourthForm
+    FourthForm,
+    FifthForm,
+    SixthForm
 },
   data() {
     return {
-      componentNum: 1,
+      componentNum: 6,
       value: 0,
       query: false,
       show: true,
