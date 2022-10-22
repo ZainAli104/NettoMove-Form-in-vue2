@@ -1,31 +1,84 @@
 <template>
     <div>
-      <h2>Second</h2>
-      <v-date-picker @input="getDate" v-model="dates" range :min="this.nowDate" />
+      <h1 class="title_header">
+        Describe <span class="title_span">what</span> you're moving.
+      </h1>
+  
+      <v-form @submit.prevent="addData" ref="form" lazy-validation>
+        <v-col class="d-flex">
+          <v-col>
+            <v-text-field
+              :rules="[required()]"
+              color="primary"
+              outlined
+              label="City"
+              v-model.trim="city"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              :rules="[required()]"
+              color="primary"
+              outlined
+              label="Country"
+              v-model.trim="country"
+              required
+            ></v-text-field>
+          </v-col>
+        </v-col>
+  
+        <div class="sub_btn d-flex justify-space-between">
+          <v-btn color="primary" large @click="backOne"
+            ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
+          >
+          <v-btn color="primary" large type="submit"
+            >Continue <v-icon>mdi-arrow-right</v-icon></v-btn
+          >
+        </div>
+      </v-form>
     </div>
   </template>
+    
+    <script>
+  import { required } from "../../utils/validators.js";
   
-  <script>
   export default {
+    props: ["num"],
     data() {
       return {
-        dates: ["2022-10-22", "2022-10-22"],
-        nowDate: null,
+        city: "",
+        country: "",
       };
     },
-  
     methods: {
-      getNowDate() {
-        this.nowDate = new Date().toISOString().split("T")[0];
-      },
+      required,
+      addData() {
+        if (this.$refs.form.validate()) {
+          const data = {
+            city: this.city,
+            country: this.country,
+          };
+          this.$store.dispatch("addData2", data);
   
-      getDate() {
-        console.log(this.dates[0], "Start Date");
-        console.log(this.dates[1], "End Date");
+          this.$emit("nextForm");
+        }
       },
-    },
-    mounted() {
-      this.getNowDate();
+      backOne() {
+          this.$emit('backOne');
+      }
     },
   };
   </script>
+    
+  <style scoped>
+  .title_header {
+    color: #000083;
+  }
+  .title_span {
+    color: #3184f9;
+  }
+  .input_fields {
+    margin-bottom: -43px;
+  }
+  </style>

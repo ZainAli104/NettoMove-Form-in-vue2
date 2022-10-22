@@ -11,7 +11,8 @@ export default new Vuex.Store({
       currentCity: '',
       currentCountry: '',
       cityTo: '',
-      countryTo: ''
+      countryTo: '',
+     luggageType: ''
     }
   },
   getters: {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     setData2(state, payload) {
       state.userData.cityTo = payload.city
       state.userData.countryTo = payload.country
+    },
+    setData3(state, payload) {
+      state.userData.luggageType = payload
     }
   },
   actions: {
@@ -34,6 +38,9 @@ export default new Vuex.Store({
     },
     addData2(context, payload) {
       context.commit('setData2', payload);
+    },
+    addData3(context, payload) {
+      context.commit('setData3', payload)
     }
   },
 });

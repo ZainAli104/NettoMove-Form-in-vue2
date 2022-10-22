@@ -5,19 +5,19 @@
     </h1>
 
     <div class="container_box">
-        <div class="sub_box" @click="selectBox('1')">
+        <div class="sub_box" :class="{sub_activeBox: activeBtn === 'Complete Household'}" @click="changeBox('Complete Household')">
             <img src="../../assets/img/icons/icons8-home.svg" alt="icon">
             <p>Complete <br>Household</p>
         </div>
-        <div class="sub_box">
+        <div class="sub_box" :class="{sub_activeBox: activeBtn === 'Part of household'}" @click="changeBox('Part of household')">
             <img src="../../assets/img/icons/icons8-kitchen-room-50.png" alt="icon"/>
             <p>Part of<br> household</p>
         </div>
-        <div class="sub_box">
+        <div class="sub_box" :class="{sub_activeBox: activeBtn === 'Few pieces of Ferniture'}" @click="changeBox('Few pieces of Ferniture')">
             <img src="../../assets/img/icons/icons8-lounge-50.png" alt="icon">
             <p>Few pieces of <br>Ferniture</p>
         </div>
-        <div class="sub_box">
+        <div class="sub_box" :class="{sub_activeBox: activeBtn === 'Some boxes or luaggage'}" @click="changeBox('Some boxes or luaggage')">
             <img src="../../assets/img/icons/icons8-boxes-64.png" alt="icon">
             <p>Some boxes or <br>luaggage</p>
         </div>
@@ -41,19 +41,14 @@ export default {
   props: ["num"],
   data() {
     return {
-      city: "",
-      country: "",
+      activeBtn: ''
     };
   },
   methods: {
     required,
-    addData() {
-      if (this.$refs.form.validate()) {
-        const data = {
-          city: this.city,
-          country: this.country,
-        };
-        this.$store.dispatch("addData2", data);
+    submit() {
+      if (this.activeBtn !== '') {
+        this.$store.dispatch("addData3", this.activeBtn);
 
         this.$emit("nextForm");
       }
@@ -61,6 +56,9 @@ export default {
     backOne() {
       this.$emit("backOne");
     },
+    changeBox(i) {
+        this.activeBtn = i;
+    }
   },
 };
 </script>
@@ -84,6 +82,7 @@ export default {
     margin-bottom: 50px;
 }
 .sub_box {
+    color: #000083;
     padding: 9px 44px;
     display: flex;
     flex-direction: column;
@@ -96,5 +95,12 @@ export default {
 .sub_box img {
     margin-bottom: 10px;
     width: 66px;
+}
+.sub_activeBox {
+    background: #3184f9;
+    border: #3184f9 2px solid;
+    color: white;
+    transform: translateY(-12px);
+    transition: .3s ease-out;
 }
 </style>
