@@ -52,10 +52,10 @@
       </v-col>
 
       <div class="sub_btn display_flex_btn justify-space-between">
-        <v-btn color="primary" large disabled
+        <v-btn class="btn_size" color="primary" large disabled
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >
-        <v-btn color="primary" large type="submit"
+        <v-btn class="btn_size" color="primary" large type="submit"
           >Continue <v-icon>mdi-arrow-right</v-icon></v-btn
         >
       </div>
@@ -108,6 +108,10 @@ export default {
 .display_flex_btn {
   display: flex;
   flex-direction: row;
+}
+
+.btn_size {
+  font-size: 14px !important;
 }
 
 .title_span {

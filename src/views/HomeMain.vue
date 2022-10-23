@@ -1,18 +1,20 @@
 <template>
   <div>
-    <h2>home</h2>
-    <v-btn color="error" dark large @click="startForm">Start</v-btn>
+    <!-- <v-btn color="error" dark large @click="startForm">Start</v-btn> -->
+    <home-page></home-page>
   </div>
 </template>
 
 <script>
-import router from '../router';
+import HomePage from './pages/HomePage.vue';
 
 export default {
-    methods: {
-        startForm() {
-            router.push('/form')
-        }
-    }
-}
+  name: 'homemain',
+  components: { HomePage },
+  methods: {
+    startForm() {
+      this.$router.push("/form");
+    },
+  },
+};
 </script>

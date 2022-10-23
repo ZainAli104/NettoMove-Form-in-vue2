@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import NotFound from './views/404.vue';
+// import NotFound from './views/404.vue';
 import Home from './views/HomeMain';
 
 Vue.use(VueRouter)
@@ -20,7 +20,7 @@ const routes = [
     {
         name: 'NotFound',
         path: '**',
-        component: NotFound
+        component: Home
     }
 ]
 

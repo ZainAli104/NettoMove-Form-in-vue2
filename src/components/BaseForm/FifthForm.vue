@@ -11,10 +11,10 @@
     </div>
 
     <div class="sub_btn display_flex_btn justify-space-between">
-      <v-btn color="primary" large @click="backOne"
+      <v-btn class="btn_size" color="primary" large @click="backOne"
         ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
       >
-      <v-btn color="primary" large @click="addData"
+      <v-btn class="btn_size" color="primary" large @click="addData"
         >Continue <v-icon>mdi-arrow-right</v-icon></v-btn
       >
     </div>
@@ -73,6 +73,8 @@ export default {
 }
 .btn_wrapper {
     margin: 20px 0;
+    display: flex;
+    flex-direction: row;
 }
 .btn_primary {
     padding: 20px 85px;
