@@ -4,7 +4,7 @@
       <h1 class="main_header" @click="mainPage">Netto<span>Move</span></h1>
       <div class="d-flex justify-space-between">
         <p class="header_p">Your Quote Request</p>
-        <p class="header_p progress_title" v-if="componentNum !== 9">{{ value }}% progress</p>
+        <p class="header_p progress_title" v-if="componentNum !== 9">{{ valueProgress }}% progress</p>
       </div>
 
       <div style="min-height: 40px; margin: 10px 30px" v-if="componentNum !== 9">
@@ -76,6 +76,15 @@ export default {
   mounted() {
     this.queryAndIndeterminate();
   },
+  computed: {
+    valueProgress() {
+      if (this.value >= 100) {
+        return 95;
+      } else {
+        return this.value
+      }
+    }
+  },
   methods: {
     queryAndIndeterminate() {
       this.query = false;
@@ -144,5 +153,11 @@ export default {
 
 .sub_btn {
     text-align: center;
+}
+
+@media (max-width: 500px) {
+  .container_sub {
+    margin: 10px;
+  }
 }
 </style>

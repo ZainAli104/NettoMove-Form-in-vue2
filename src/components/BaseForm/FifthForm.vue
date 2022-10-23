@@ -10,7 +10,7 @@
       </div>
     </div>
 
-    <div class="sub_btn d-flex justify-space-between">
+    <div class="sub_btn display_flex_btn justify-space-between">
       <v-btn color="primary" large @click="backOne"
         ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
       >
@@ -69,6 +69,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 .btn_wrapper {
     margin: 20px 0;

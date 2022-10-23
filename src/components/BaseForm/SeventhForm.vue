@@ -18,7 +18,7 @@
         ></v-text-field>
       </v-col>
 
-      <div class="sub_btn d-flex justify-space-between">
+      <div class="sub_btn display_flex_btn justify-space-between">
         <v-btn color="primary" large @click="backOne"
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >
@@ -71,5 +71,11 @@ export default {
 }
 .input_name {
   max-width: 30rem;
+}
+
+@media (max-width: 500px) {
+  .title_header {
+    font-size: 23px;
+  }
 }
 </style>

@@ -5,8 +5,8 @@
     </h1>
 
     <v-form @submit.prevent="addData" ref="form" lazy-validation>
-      <v-col class="d-flex">
-        <v-col>
+      <v-col class="display_flex">
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -16,7 +16,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -28,7 +28,7 @@
         </v-col>
       </v-col>
 
-      <div class="sub_btn d-flex justify-space-between">
+      <div class="sub_btn display_flex_btn justify-space-between">
         <v-btn color="primary" large @click="backOne"
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >

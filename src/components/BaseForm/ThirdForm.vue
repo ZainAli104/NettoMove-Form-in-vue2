@@ -24,7 +24,7 @@
     </div>
     <p class="p_text" v-if="showValidation">Please Select one catagory!</p>
 
-    <div class="sub_btn d-flex justify-space-between">
+    <div class="sub_btn display_flex_btn justify-space-between">
       <v-btn color="primary" large @click="backOne"
         ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
       >
@@ -111,5 +111,11 @@ export default {
 .p_text {
     color: red;
     margin-top: -15px;
+}
+
+@media (max-width: 934px) {
+  .container_box {
+    flex-direction: column;
+  }
 }
 </style>

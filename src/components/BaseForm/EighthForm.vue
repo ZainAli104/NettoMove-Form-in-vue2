@@ -29,7 +29,7 @@
 
       <p class="p_text">By submitting this form, you are requesting TriGlobal B.V. to bring you into contact with up to 5 suppliers of Moving Services. Your data will only be transferred to these suppliers, who will contact you via e-mail, telephone or text. For more information, read our Privacy Policy.</p>
 
-      <div class="sub_btn d-flex justify-space-between">
+      <div class="sub_btn display_flex_btn justify-space-between">
         <v-btn color="primary" large @click="backOne"
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >
@@ -88,12 +88,18 @@ export default {
 }
 .input_name {
   max-width: 30rem;
-  min-width: 23rem;
+  min-width: 70%;
 }
 .p_text {
     font-size: 13px;
     margin-bottom: 30px;
     text-align: center;
     color: #616161;
+}
+
+@media (max-width: 600px) {
+  .title_header {
+    font-size: 23px;
+  }
 }
 </style>

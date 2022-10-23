@@ -14,7 +14,7 @@
         placeholder="E.g. contents of a 4-room household"
       ></v-textarea>
 
-      <div class="sub_btn d-flex justify-space-between">
+      <div class="sub_btn display_flex_btn justify-space-between">
         <v-btn color="primary" large @click="backOne"
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >

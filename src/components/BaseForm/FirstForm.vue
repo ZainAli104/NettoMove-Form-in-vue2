@@ -5,8 +5,8 @@
     </h1>
 
     <v-form @submit.prevent="addData" ref="form" lazy-validation>
-      <v-col class="d-flex input_fields">
-        <v-col>
+      <v-col class="display_flex input_fields">
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -16,7 +16,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -28,8 +28,8 @@
         </v-col>
       </v-col>
 
-      <v-col class="d-flex">
-        <v-col>
+      <v-col class="display_flex">
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -39,7 +39,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col class="input_gap">
           <v-text-field
             :rules="[required()]"
             color="primary"
@@ -51,7 +51,7 @@
         </v-col>
       </v-col>
 
-      <div class="sub_btn d-flex justify-space-between">
+      <div class="sub_btn display_flex_btn justify-space-between">
         <v-btn color="primary" large disabled
           ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
         >
@@ -100,11 +100,40 @@ export default {
   color: #000083;
 }
 
+.display_flex {
+  display: flex;
+  flex-direction: row;
+}
+
+.display_flex_btn {
+  display: flex;
+  flex-direction: row;
+}
+
 .title_span {
   color: #3184f9;
 }
 
 .input_fields {
   margin-bottom: -43px;
+}
+
+@media (max-width: 700px) {
+  .title_header {
+    font-size: 26px;
+  }
+  .display_flex {
+    flex-direction: column;
+  }
+  .input_fields {
+    margin-bottom: -35px;
+  }
+  .display_flex_btn {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+  .input_gap {
+    margin-bottom: -20px;
+  }
 }
 </style>

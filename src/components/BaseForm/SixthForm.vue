@@ -15,7 +15,7 @@
 
     <p class="p_red" v-if="isValid">Please select a date!</p>
 
-    <div class="sub_btn d-flex justify-space-between">
+    <div class="sub_btn display_flex_btn justify-space-between">
       <v-btn color="primary" large @click="backOne"
         ><v-icon>mdi-arrow-left</v-icon> Back</v-btn
       >
