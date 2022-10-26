@@ -2,26 +2,22 @@
   <div>
     <the-header></the-header>
 
+    
+
     <main>
       <article>
-        <!-- 
-        - #HERO
-      -->
-
         <section class="hero" id="home">
           <div class="container">
             <div class="hero-content">
-              <p class="hero-subtitle">We Are Moving Helpers From Denmark</p>
+              <p class="hero-subtitle">Helping people to move from one place to another place with no tension</p>
 
-              <h2 class="h2 hero-title">Your Moving Patner</h2>
+              <h2 class="h2 hero-title">
+                About Us
+              </h2>
 
               <p class="hero-text">
-                Get 5 free quotes from moving companies and save up to 40%
-                <br />
-                Start now by fill simple form
+                Netto Move is an independent internet platform since 2004, dedicated to advising consumers who want to move internationally. The most important goal is to simplify moving internationally. We offer a free quote form to make an informed decision on the right international mover. Our organisation selects the world’s best international removers on the basis of important criteria. More details are given below
               </p>
-
-              <button class="btn" @click="startForm">Start</button>
             </div>
 
             <figure class="hero-banner">
@@ -251,84 +247,20 @@
       </article>
     </main>
 
+
     <the-footer></the-footer>
 
     <a href="#top" class="go-top active" aria-label="Go To Top" data-go-top>
-      <ion-icon name="arrow-up-outline"></ion-icon>
+    <ion-icon name="arrow-up-outline"></ion-icon>
     </a>
   </div>
 </template>
 
 <script>
-import TheHeader from '../../components/UI/TheHeader.vue';
-import TheFooter from '../../components/UI/TheFooter.vue';
+import TheFooter from "../../components/UI/TheFooter.vue";
+import TheHeader from "../../components/UI/TheHeader.vue";
+
 export default {
   components: { TheHeader, TheFooter },
-  name: "homepage",
-  mounted() {
-    const navOpenBtn = document.querySelector("[data-nav-open-btn]");
-    const navbar = document.querySelector("[data-navbar]");
-    const navCloseBtn = document.querySelector("[data-nav-close-btn]");
-    const overlay = document.querySelector("[data-overlay]");
-
-    const elemArr = [navCloseBtn, overlay, navOpenBtn];
-
-    for (let i = 0; i < elemArr.length; i++) {
-      elemArr[i].addEventListener("click", function () {
-        navbar.classList.toggle("active");
-        overlay.classList.toggle("active");
-      });
-    }
-
-    /**
-     * toggle navbar & overlay when click any navbar-link
-     */
-
-    const navbarLinks = document.querySelectorAll("[data-navbar-link]");
-
-    for (let i = 0; i < navbarLinks.length; i++) {
-      navbarLinks[i].addEventListener("click", function () {
-        navbar.classList.toggle("active");
-        overlay.classList.toggle("active");
-      });
-    }
-
-    /**
-     * header & go-top-btn active
-     * when window scroll down to 400px
-     */
-
-    const header = document.querySelector("[data-header]");
-    const goTopBtn = document.querySelector("[data-go-top]");
-
-    window.addEventListener("scroll", function () {
-      if (window.scrollY >= 400) {
-        header.classList.add("active");
-        goTopBtn.classList.add("active");
-      } else {
-        header.classList.remove("active");
-        goTopBtn.classList.remove("active");
-      }
-    });
-  },
-  methods: {
-    startForm() {
-      this.$router.push("/form");
-    },
-    clickLogo() {
-      this.$router.push("/");
-    },
-    aboutPage() {
-      this.$router.push("/about");
-    },
-  },
 };
 </script>
-
-<style>
-@import "../../assets/style/style.css";
-
-.logo_pointer {
-  cursor: pointer;
-}
-</style>

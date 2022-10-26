@@ -18,6 +18,16 @@ const routes = [
         component: () => import('./views/FormMain.vue')
     },
     {
+        path: '/about',
+        name: 'About',
+        component: () => import('./views/pages/AboutPage')
+    },
+    {
+        path: '/contact',
+        name: 'Contact',
+        component: () => import('./views/pages/ContactUs')
+    },
+    {
         name: 'NotFound',
         path: '**',
         component: Home
