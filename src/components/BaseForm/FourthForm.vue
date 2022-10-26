@@ -21,6 +21,7 @@
           <v-dialog v-model="dialog" width="900">
             <template v-slot:activator="{ on, attrs }">
               <div
+                id="calBtnMain"
                 style="
                   display: flex;
                   align-items: center;
@@ -32,26 +33,35 @@
                   For more accurate quotes, calculate the volume here
                   <v-icon large>mdi-arrow-right</v-icon>
                 </p>
-                <v-btn x-large color="#63A2FA" dark v-bind="attrs" v-on="on">
-                  <v-icon style="margin-right: 10px;">mdi-calculator</v-icon
-                  >Volume Calculator</v-btn
+                <v-btn
+                  class="btn_size"
+                  large
+                  color="#63A2FA"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon large>mdi-calculator</v-icon>Volume Calculator</v-btn
                 >
               </div>
             </template>
-
-            <v-card style="height: 500px">
-              <v-tabs v-model="tab" grow>
+            <v-card style="height: 540px">
+              <v-tabs color="primary" v-model="tab" show-arrows grow>
                 <v-tab
                   v-for="item in items"
                   :key="item"
-                  style="display: flex; flex-direction: column"
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    background-color: #eaf3ff;
+                  "
                 >
-                  <v-icon large v-text="item.icon" />
+                  <v-icon v-text="item.icon" />
                   <h3>{{ item.name }}</h3>
                 </v-tab>
               </v-tabs>
 
-              <div style="height: 70%; overflow-y: scroll">
+              <div style="height: 75%; overflow-y: scroll">
                 <div v-if="tab === 0">
                   <div
                     v-for="(livingRoomItem, index) in livingRoomItems"
@@ -398,7 +408,6 @@
               </div>
 
               <v-footer
-                height="100"
                 app
                 bottom
                 absolute
@@ -406,13 +415,15 @@
                 style="
                   display: flex;
                   align-items: center;
-                  justify-content: space-between;
+                  justify-content: center;
+                  gap: 20%;
+                  padding: 10px;
                 "
               >
-                <h2 style="font-size: 30px; margin-left: 20px; color: #000083">
-                  Netto<span class="span_title">Move</span>
-                </h2>
-                <div style="display: flex; align-items: center">
+                <h2 style="font-size: 30px; color: #000083">Netto<span class="span_title">Move</span> </h2>
+                <div
+                  style="display: flex; align-items: center; margin: 10px 0px"
+                >
                   <div style="display: flex; align-items: center">
                     <span
                       style="font-size: 34px; font-weight: bold; color: #3184f9"
@@ -429,8 +440,8 @@
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 26 52"
                     fit=""
-                    height="50px"
-                    width="50px"
+                    height="40px"
+                    width="30px"
                     preserveAspectRatio="xMidYMid meet"
                     focusable="false"
                   >
@@ -452,16 +463,23 @@
                     <span style="margin-top: -10px; color: #000083">3</span>
                   </div>
                 </div>
-                <div style="margin-right: 20px">
+                <div style="display: flex; flex-direction: column; gap: 5px">
                   <v-btn
-                    x-large
+                    class="btn_size"
+                    large
                     dark
                     color="primary"
-                    class="btn_size"
                     @click="saveCalculation()"
                   >
                     Save Calculation
                   </v-btn>
+                  <v-btn
+                    @click="dialog = close"
+                    class="btn_size"
+                    dark
+                    color="primary"
+                    >Close</v-btn
+                  >
                 </div>
               </v-footer>
             </v-card>
@@ -1139,13 +1157,7 @@ export default {
     required,
     addData() {
       if (this.$refs.form.validate()) {
-        const data = {
-          description: this.description,
-          meter: this.meter,
-          foot: this.foot
-        }
-
-        this.$store.dispatch("addData4", data);
+        this.$store.dispatch("addData4", this.description);
 
         this.$emit("nextForm");
       }
@@ -1298,7 +1310,9 @@ export default {
   margin-top: 15px;
 }
 
-.span_title {
-  color: hsl(342, 100%, 50%);
+@media screen and (max-width: 600px) {
+  #calBtnMain {
+    flex-direction: column;
+  }
 }
 </style>
