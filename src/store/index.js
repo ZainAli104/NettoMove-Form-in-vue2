@@ -14,6 +14,8 @@ export default new Vuex.Store({
       countryTo: "",
       luggageType: "",
       description: '',
+      meter: '',
+      foot: '',
       movingForWork: '',
       date: '',
       name: '',
@@ -37,7 +39,9 @@ export default new Vuex.Store({
       state.userData.luggageType = payload;
     },
     setData4(state, payload) {
-      state.userData.description = payload;
+      state.userData.description = payload.description;
+      state.userData.meter = payload.meter;
+      state.userData.foot = payload.foot;
     },
     setData5(state, payload) {
       state.userData.movingForWork = payload;

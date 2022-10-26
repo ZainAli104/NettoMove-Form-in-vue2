@@ -535,6 +535,6 @@ export default {
 @import "../../assets/style/style.css";
 
 .logo_pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 </style>
