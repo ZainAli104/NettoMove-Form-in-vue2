@@ -1,4 +1,4 @@
-# posto-home-admin
+# netto-move
 
 ## Project setup
 ```
