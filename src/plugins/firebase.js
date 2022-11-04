@@ -1,19 +1,16 @@
 import firebase from "firebase/app";
-import 'firebase/auth';
+import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
 
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyDgv5Otp_k5mu_E_tEYE2o_FNy9h4oLEN4",
-    authDomain: "posto-home.firebaseapp.com",
-    projectId: "posto-home",
-    storageBucket: "posto-home.appspot.com",
-    messagingSenderId: "124757489240",
-    appId: "1:124757489240:web:ca46352d80145e1c1c7c2d",
-    measurementId: "G-0HS6LTR84W"
+  apiKey: "AIzaSyBxz3cIHBhKRT1bm3JQrATqA-DyjCF4CbY",
+  authDomain: "netto-move.firebaseapp.com",
+  projectId: "netto-move",
+  storageBucket: "netto-move.appspot.com",
+  messagingSenderId: "791792649023",
+  appId: "1:791792649023:web:38868642321f1f04ecc98a",
 };
 
 firebase.initializeApp(firebaseConfig);
-

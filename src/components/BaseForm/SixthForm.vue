@@ -31,7 +31,7 @@ export default {
   props: ["num"],
   data() {
     return {
-      date: "2022-10-22",
+      date: "",
       nowDate: null,
       isValid: false
     };
@@ -44,7 +44,7 @@ export default {
     //   console.log(this.date, "Start Date");
     },
     setData() {
-      if (this.date !== '2022-10-22') {
+      if (this.date !== '') {
         this.$store.dispatch("addData6", this.date);
         this.isValid = false;
 

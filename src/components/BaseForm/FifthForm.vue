@@ -101,4 +101,10 @@ export default {
 .red_border {
     border: red 1px solid;
 }
+
+@media (max-width: 600px) {
+  .btn_wrapper {
+    flex-direction: column;
+  }
+}
 </style>
