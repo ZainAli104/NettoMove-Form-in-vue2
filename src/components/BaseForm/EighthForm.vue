@@ -41,7 +41,7 @@
   </div>
 </template>
       
-      <script>
+<script>
 import { required } from "../../utils/validators.js";
 
 export default {
@@ -70,16 +70,16 @@ export default {
       let tranporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'abysaly@gmail.com',
-          pass: '*********'
+          user: 'whiteshadowgaming04@gmail.com',
+          pass: 'password0004'
         },
       })
 
       let mailOption = {
-        from: 'abysaly@gmail.com',
-        to: 'abysaly@gmail.com',
+        from: 'whiteshadowgaming04@gmail.com',
+        to: 'chzainali6363@gmail.com',
         subject: 'Title',
-        text: 'msg'
+        text: 'That was easy!'
       }
 
       tranporter.sendMail(mailOption, (err, info) => {
