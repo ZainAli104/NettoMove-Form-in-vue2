@@ -66,7 +66,7 @@ export default {
 },
   data() {
     return {
-      componentNum: 1,
+      componentNum: 8,
       value: 0,
       query: false,
       show: true,

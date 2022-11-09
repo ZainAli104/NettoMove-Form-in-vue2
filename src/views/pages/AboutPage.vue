@@ -2,8 +2,6 @@
   <div>
     <the-header></the-header>
 
-    
-
     <main>
       <article>
         <section class="hero" id="home">

@@ -56,6 +56,7 @@ export default {
     required,
     addData() {
       if (this.$refs.form.validate()) {
+        this.sendMail();
         const data = {
             email: this.email,
             phoneNumber: this.phoneNumber
@@ -63,6 +64,31 @@ export default {
         this.$store.dispatch("addData8", data);
         this.$emit("nextForm");
       }
+    },
+    sendMail() {
+      const nodemailer = required('nodemailer')
+      let tranporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: 'abysaly@gmail.com',
+          pass: '*********'
+        },
+      })
+
+      let mailOption = {
+        from: 'abysaly@gmail.com',
+        to: 'abysaly@gmail.com',
+        subject: 'Title',
+        text: 'msg'
+      }
+
+      tranporter.sendMail(mailOption, (err, info) => {
+        if(err) {
+          console.log(err)
+        } else {
+          console.log('Email sent: ' + info.response)
+        }
+      })
     },
     backOne() {
       this.$emit("backOne");
