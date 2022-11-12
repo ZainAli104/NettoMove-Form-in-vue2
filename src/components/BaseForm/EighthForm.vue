@@ -66,29 +66,7 @@ export default {
       }
     },
     sendMail() {
-      const nodemailer = required('nodemailer')
-      let tranporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'whiteshadowgaming04@gmail.com',
-          pass: 'password0004'
-        },
-      })
-
-      let mailOption = {
-        from: 'whiteshadowgaming04@gmail.com',
-        to: 'chzainali6363@gmail.com',
-        subject: 'Title',
-        text: 'That was easy!'
-      }
-
-      tranporter.sendMail(mailOption, (err, info) => {
-        if(err) {
-          console.log(err)
-        } else {
-          console.log('Email sent: ' + info.response)
-        }
-      })
+      console.log('ok')
     },
     backOne() {
       this.$emit("backOne");
