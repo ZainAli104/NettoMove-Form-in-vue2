@@ -21,7 +21,8 @@
                 Start now by fill simple form
               </p>
 
-              <button class="btn" @click="startForm">Start</button>
+              <button class="btn btn_2" @click="startForm">Moving Form</button>
+              <button class="btn btn_2 btn_3" @click="tForm">Transportation Form</button>
             </div>
 
             <figure class="hero-banner">
@@ -321,6 +322,9 @@ export default {
     aboutPage() {
       this.$router.push("/about");
     },
+    tForm() {
+      this.$router.push('/transportation-form')
+    }
   },
 };
 </script>
@@ -330,5 +334,19 @@ export default {
 
 .logo_pointer {
   cursor: pointer;
+}
+.btn_2 {
+  display: inline !important;
+}
+.btn_3 {
+  margin-left: 50px;
+}
+
+@media (max-width: 1000px) {
+  .btn_3 {
+    display: block !important;
+    margin-left: 0;
+    margin-top: 20px;
+  }
 }
 </style>

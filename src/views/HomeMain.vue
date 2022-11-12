@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- <v-btn color="error" dark large @click="startForm">Start</v-btn> -->
     <home-page></home-page>
   </div>
 </template>

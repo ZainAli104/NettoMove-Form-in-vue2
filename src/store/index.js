@@ -22,6 +22,11 @@ export default new Vuex.Store({
       email: '',
       phoneNumber: ''
     },
+    userData2: {
+      plan: '',
+      pickUpDate: '',
+      deliverDate: ''
+    },
   },
   getters: {},
   mutations: {
@@ -56,6 +61,15 @@ export default new Vuex.Store({
       state.userData.email = payload.email;
       state.userData.phoneNumber = payload.phoneNumber;
     },
+    TsetData5(state, payload) {
+      state.userData2.plan = payload
+    },
+    TsetData6(state, payload) {
+      state.userData2.pickUpDate = payload
+    },
+    TsetData7(state, payload) {
+      state.userData2.deliverDate = payload
+    },
   },
   actions: {
     addData1(context, payload) {
@@ -81,6 +95,15 @@ export default new Vuex.Store({
     },
     addData8(context, payload) {
       context.commit("setData8", payload);
+    },
+    TaddData5(context, payload) {
+      context.commit('TsetData5', payload)
+    },
+    TaddData6(context, payload) {
+      context.commit('TsetData6', payload)
+    },
+    TaddData7(context, payload) {
+      context.commit('TsetData7', payload)
     },
   },
 });
