@@ -28,7 +28,14 @@ export default new Vuex.Store({
       deliverDate: ''
     },
   },
-  getters: {},
+  getters: {
+    dataUser(state) {
+      return state.userData;
+    },
+    dataUser2(state) {
+      return state.userData2;
+    }
+  },
   mutations: {
     setData1(state, payload) {
       state.userData.streetAddress = payload.streetAddress;

@@ -1,5 +1,19 @@
 <template>
   <div id="main">
+    <v-dialog v-model="isLoading" max-width="600" width="200" persistent>
+      <v-card
+        style="
+          padding: 20px;
+          text-align: left;
+          display: flex;
+          align-items: center;
+        "
+      >
+        <v-progress-circular indeterminate color="#3184F9" />
+        <p style="margin-left: 20px; margin-bottom: 0">Please wait</p>
+      </v-card>
+    </v-dialog>
+
     <div>
       <h1 class="main_header" @click="mainPage">Netto<span>Move</span></h1>
       <div class="d-flex justify-space-between">
@@ -51,6 +65,9 @@ import SeventhForm from '../components/BaseForm/SeventhForm.vue';
 import EighthForm from '../components/BaseForm/EighthForm.vue';
 import LastForm from '../components/BaseForm/LastForm.vue';
 
+import { addDoc } from '@firebase/firestore';
+import { movingUsers } from '../plugins/firebase';
+
 export default {
   name: "Form",
   components: {
@@ -70,7 +87,8 @@ export default {
       value: 0,
       query: false,
       show: true,
-      counterback: 0
+      counterback: 0,
+      isLoading: false
     };
   },
   mounted() {
@@ -91,12 +109,23 @@ export default {
       this.show = true;
       this.value = 0;
     },
-    nextForm() {
+    async nextForm() {
         this.componentNum++;
         if (this.counterback === 0) {
           this.value = this.value + 15;
         } else {
           this.counterback--;
+        }
+        if (this.componentNum == 9) {
+          try {
+            this.isLoading = true
+            const userData = this.$store.getters.dataUser;
+            await addDoc(movingUsers, userData)
+            this.isLoading = false
+          }
+          catch (err) {
+            console.log(err)
+          }
         }
     },
     backForm() {

@@ -1,13 +1,26 @@
 <template>
     <div id="main">
+    <v-dialog v-model="isLoading" max-width="600" width="200" persistent>
+      <v-card
+        style="
+          padding: 20px;
+          text-align: left;
+          display: flex;
+          align-items: center;"
+      >
+        <v-progress-circular indeterminate color="#3184F9" />
+        <p style="margin-left: 20px; margin-bottom: 0">Please wait</p>
+      </v-card>
+    </v-dialog>
+
       <div>
         <h1 class="main_header" @click="mainPage">Netto<span>Move</span></h1>
         <div class="d-flex justify-space-between">
           <p class="header_p">Your Quote Request for transportation</p>
-          <p class="header_p progress_title" v-if="componentNum !== 9">{{ valueProgress }}% progress</p>
+          <p class="header_p progress_title" v-if="componentNum !== 10">{{ valueProgress }}% progress</p>
         </div>
 
-        <div style="min-height: 40px; margin: 10px 30px" v-if="componentNum !== 9">
+        <div style="min-height: 40px; margin: 10px 30px" v-if="componentNum !== 10">
           <v-progress-linear
             v-model="value"
             :active="show"
@@ -41,77 +54,99 @@
     </div>
   </template>
   
-  <script>
-  import FirstForm from '../components/TransForm/FirstForm.vue';
-  import SecondForm from '../components/TransForm/SecondForm.vue';
-  import ThirdForm from '../components/TransForm/ThirdForm.vue';
-  import FourthForm from '../components/TransForm/FourthForm.vue';
-  import FifthForm from '../components/TransForm/FifthForm.vue';
-  import SixthForm from '../components/TransForm/SixthForm.vue';
-  import SeventhForm from '../components/TransForm/SeventhForm.vue';
-  import EighthForm from '../components/TransForm/EighthForm.vue';
-  import LastForm from '../components/TransForm/LastForm.vue';
-  import NineForm from '../components/TransForm/NineForm.vue';
+<script>
+import FirstForm from '../components/TransForm/FirstForm.vue';
+import SecondForm from '../components/TransForm/SecondForm.vue';
+import ThirdForm from '../components/TransForm/ThirdForm.vue';
+import FourthForm from '../components/TransForm/FourthForm.vue';
+import FifthForm from '../components/TransForm/FifthForm.vue';
+import SixthForm from '../components/TransForm/SixthForm.vue';
+import SeventhForm from '../components/TransForm/SeventhForm.vue';
+import EighthForm from '../components/TransForm/EighthForm.vue';
+import LastForm from '../components/TransForm/LastForm.vue';
+import NineForm from '../components/TransForm/NineForm.vue';
+
+import { addDoc } from '@firebase/firestore';
+import { transportUsers } from '../plugins/firebase';
   
-  export default {
-    name: "Form",
-    components: {
-      FirstForm,
-      SecondForm,
-      ThirdForm,
-      FourthForm,
-      FifthForm,
-      SixthForm,
-      SeventhForm,
-      EighthForm,
-      LastForm,
-      NineForm
+export default {
+  name: "Form",
+  components: {
+    FirstForm,
+    SecondForm,
+    ThirdForm,
+    FourthForm,
+    FifthForm,
+    SixthForm,
+    SeventhForm,
+    EighthForm,
+    LastForm,
+    NineForm
+},
+  data() {
+    return {
+      componentNum: 1,
+      value: 0,
+      query: false,
+      show: true,
+      counterback: 0,
+      isLoading: false
+    };
   },
-    data() {
-      return {
-        componentNum: 1,
-        value: 0,
-        query: false,
-        show: true,
-        counterback: 0
-      };
+  mounted() {
+    this.queryAndIndeterminate();
+  },
+  computed: {
+    valueProgress() {
+      if (this.value >= 100) {
+        return 100;
+      } else {
+        return this.value
+      }
+    }
+  },
+  methods: {
+    queryAndIndeterminate() {
+      this.query = false;
+      this.show = true;
+      this.value = 0;
     },
-    mounted() {
-      this.queryAndIndeterminate();
-    },
-    computed: {
-      valueProgress() {
-        if (this.value >= 100) {
-          return 95;
+    async nextForm() {
+        this.componentNum++;
+        if (this.counterback === 0) {
+          this.value = this.value + 15;
         } else {
-          return this.value
+          this.counterback--;
         }
-      }
-    },
-    methods: {
-      queryAndIndeterminate() {
-        this.query = false;
-        this.show = true;
-        this.value = 0;
-      },
-      nextForm() {
-          this.componentNum++;
-          if (this.counterback === 0) {
-            this.value = this.value + 15;
-          } else {
-            this.counterback--;
+        if (this.componentNum == 10) {
+          try {
+            this.isLoading = true
+            let userData = this.$store.getters.dataUser;
+            let userData2 = this.$store.getters.dataUser2;
+            userData = {
+              ...userData,
+              plan: userData2.plan,
+              pickUpDate: userData2.pickUpDate,
+              deliverDate: userData2.deliverDate
+            }
+            await addDoc(transportUsers, userData)
+            this.isLoading = false
           }
-      },
-      backForm() {
-          this.componentNum--;
-          this.counterback++;
-      },
-      mainPage() {
-        this.$router.push('/');
-      }
+          catch (err) {
+            console.log(err)
+          }
+        }
     },
-  };
-  </script>
+    backForm() {
+        this.componentNum--;
+        this.counterback++;
+    },
+    mainPage() {
+      this.$router.push('/');
+    }
+  },
+};
+</script>
   
   <style>
   #main {

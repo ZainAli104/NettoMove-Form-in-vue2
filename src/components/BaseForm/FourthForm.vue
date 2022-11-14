@@ -499,7 +499,7 @@
   </div>
 </template>
     
-    <script>
+<script>
 import { required } from "../../utils/validators.js";
 
 export default {
@@ -1147,7 +1147,6 @@ export default {
           value: 0,
         },
       ],
-
       tab: 0,
       meter: 0.0,
       foot: 0.0,
@@ -1157,7 +1156,12 @@ export default {
     required,
     addData() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("addData4", this.description);
+        const data = {
+          description: this.description,
+          meter: this.meter,
+          foot: this.foot
+        }
+        this.$store.dispatch("addData4", data);
 
         this.$emit("nextForm");
       }

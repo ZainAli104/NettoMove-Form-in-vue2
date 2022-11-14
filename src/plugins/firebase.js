@@ -1,7 +1,5 @@
-import firebase from "firebase/app";
-import "firebase/auth";
-import "firebase/firestore";
-import "firebase/storage";
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection } from "firebase/firestore";
 
 
 const firebaseConfig = {
@@ -10,7 +8,17 @@ const firebaseConfig = {
   projectId: "netto-move",
   storageBucket: "netto-move.appspot.com",
   messagingSenderId: "791792649023",
-  appId: "1:791792649023:web:38868642321f1f04ecc98a",
+  appId: "1:791792649023:web:38868642321f1f04ecc98a"
 };
 
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const movingUsers = collection(db, 'movingUsers');
+const transportUsers = collection(db, 'transportUsers');
+
+export {
+  app,
+  db,
+  movingUsers,
+  transportUsers
+}

@@ -56,7 +56,7 @@ export default {
     required,
     addData() {
       if (this.$refs.form.validate()) {
-        this.sendMail();
+        // this.sendMail();
         const data = {
             email: this.email,
             phoneNumber: this.phoneNumber

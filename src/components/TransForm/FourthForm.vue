@@ -1157,7 +1157,12 @@ export default {
     required,
     addData() {
       if (this.$refs.form.validate()) {
-        this.$store.dispatch("addData4", this.description);
+        const data = {
+          description: this.description,
+          meter: this.meter,
+          foot: this.foot
+        }
+        this.$store.dispatch("addData4", data);
 
         this.$emit("nextForm");
       }
