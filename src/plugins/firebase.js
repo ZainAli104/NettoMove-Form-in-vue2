@@ -15,10 +15,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const movingUsers = collection(db, 'movingUsers');
 const transportUsers = collection(db, 'transportUsers');
+const companies = collection(db, 'Companies');
 
 export {
   app,
   db,
   movingUsers,
-  transportUsers
+  transportUsers,
+  companies
 }

@@ -4,7 +4,7 @@
     <h1 class="title_header">
         Your form has been <span class="title_span">submitted</span>
     </h1>
-    <p class="text_p">The moving companies will start reaching out to you within one working day.</p>
+    <p class="text_p">The transportation companies will start reaching out to you within one working day.</p>
   </div>
 </template>
         

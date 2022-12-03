@@ -43,6 +43,9 @@
       
 <script>
 import { required } from "../../utils/validators.js";
+import { companies } from '../../plugins/firebase';
+import { getDocs } from '@firebase/firestore';
+import dayjs from "dayjs";
 
 export default {
   props: ["num"],
@@ -50,23 +53,73 @@ export default {
     return {
       email: "",
       phoneNumber: "",
+      filterEmails: null,
+      userData: null
     };
+  },
+  async mounted() {
+    this.userData = this.$store.getters.dataUser
+
+    var isSameOrBefore = require("dayjs/plugin/isSameOrBefore");
+    dayjs.extend(isSameOrBefore);
+
+    const snapshot = await getDocs(companies)
+      const data = [];
+      snapshot.docs.map((e) => {
+        data.push({ id: e.id, ...e.data() });
+      });
+      
+      const filterData = data.filter((school) => {
+        const date = new Date(1970, 0, 1);
+        date.setSeconds(
+          school.contracts[school.contracts.length - 1].end_date.seconds
+        );
+        const current = new Date();
+        current.setHours(0, 0, 0, 0);
+        return dayjs(current).isSameOrBefore(dayjs(date));
+      });
+
+      this.filterEmails = filterData
   },
   methods: {
     required,
-    addData() {
+    async addData() {
       if (this.$refs.form.validate()) {
-        // this.sendMail();
         const data = {
-            email: this.email,
-            phoneNumber: this.phoneNumber
+          email: this.email,
+          phoneNumber: this.phoneNumber
         }
         this.$store.dispatch("addData8", data);
+        this.filterEmails.forEach((mail) => {
+            this.formSend(mail.email)
+        })
         this.$emit("nextForm");
       }
     },
-    sendMail() {
-      console.log('ok')
+    async formSend(e_mail) {
+      if (this.$refs.form.validate()) {        
+        const sender = "https://formsubmit.co/ajax/" + e_mail
+        await fetch(sender, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            Name: this.userData.name,
+            email: this.email,
+            Subject: 'New Request for Moving',
+            ...this.userData
+          }),
+        }).then((res) => {
+          if (res.status === 200) {
+            console.log('ok')
+            this.$refs.form.reset();
+          } else {
+            this.alert = "Something went wrong! Please try again later";
+          }
+        });
+      }
     },
     backOne() {
       this.$emit("backOne");
@@ -74,7 +127,7 @@ export default {
   },
 };
 </script>
-      
+
 <style scoped>
 .title_header {
   color: #000083;

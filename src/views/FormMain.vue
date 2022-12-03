@@ -116,7 +116,7 @@ export default {
         } else {
           this.counterback--;
         }
-        if (this.componentNum == 9) {
+        if (this.componentNum == 91) {
           try {
             this.isLoading = true
             const userData = this.$store.getters.dataUser;
